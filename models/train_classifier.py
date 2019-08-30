@@ -26,10 +26,11 @@ def load_data(database_filepath):
     engine = create_engine('sqlite:///'+ database_filepath)
     df = pd.read_sql_table("DisasterMessages", engine)
     
-    X = df["message"]
-    Y = df.iloc[:,4:39]
+    X = df["message"]   #Raw messages
+    Y = df.iloc[:,4:39] #Category values
     category_names = list(df.columns[4:])
     return X, Y, category_names
+
 
 def tokenize(text):
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
@@ -55,6 +56,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     for i in range(len(category_names)-1):
         print("Category:", category_names[i],"\n", classification_report(Y_test.iloc[:, i], Y_pred[:, i]))
     
+    #Printing the average accuracy values of all categories
     Y_result = []
     for i in range(Y_pred.shape[1]):
         Y_result.append(precision_recall_fscore_support(Y_test.iloc[:,i], Y_pred[:,i], average='weighted'))

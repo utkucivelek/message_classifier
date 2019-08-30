@@ -1,14 +1,15 @@
 # Disaster Response Pipeline Project
-
 This is a project prepared in the context of Udacity Data Scientist Nano-program.
+
 Most of the codes & explainations are provided from the program.
+
 In this repository there exist three code files:
 
 ### process_data.py as ETL Pipeline
-Loads the messages and categories datasets
-Merges the two datasets
-Cleans the data
-Stores it in a SQLite database
+-Loads the messages and categories datasets
+-Merges the two datasets
+-Cleans the data
+-Stores it in a SQLite database
 
 ### train_classifier.py as ML Pipeline
 Loads data from the SQLite database

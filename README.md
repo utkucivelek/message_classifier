@@ -6,22 +6,21 @@ Most of the codes & explainations are provided from the program.
 In this repository there exist three code files:
 
 ### process_data.py as ETL Pipeline
--Loads the messages and categories datasets
--Merges the two datasets
--Cleans the data
--Stores it in a SQLite database
+- Loads the messages and categories datasets
+- Merges the two datasets
+- Cleans the data
+- Stores it in a SQLite database with sqlalchemy library
 
 ### train_classifier.py as ML Pipeline
-Loads data from the SQLite database
-Splits the dataset into training and test sets
-Builds a text processing and machine learning pipeline
-Trains and tunes a model using GridSearchCV
-Outputs results on the test set
-Exports the final model as a pickle file
+- Loads data from the SQLite database with sqlalchemy library
+- Splits the dataset into training and test sets
+- Builds a text processing and machine learning pipeline with nltk & sklearn libraries
+- Trains and tunes RandomForestClassifier using GridSearchCV
+- Outputs results on the test set
+- Exports the final model as a pickle file
 
-### run.py as Flask Web App
-
-
+### run.py as Web App
+- Generates a web app with Flask & Plotly libraries
 
 
 ### Instructions:
@@ -35,4 +34,8 @@ Exports the final model as a pickle file
 2. Run the following command in the app's directory to run your web app.
     `python run.py`
 
-3. Go to https://view6914b2f4-3001.udacity-student-workspaces.com/
+3. Run another terminal windows and type env|grep WORK
+In a web browser window, open https://SPACEID-3001.SPACEDOMAIN by changing UPPERCASE elements with the related outputs of env|grep WORK
+
+### Example App:
+https://view6914b2f4-3001.udacity-student-workspaces.com/

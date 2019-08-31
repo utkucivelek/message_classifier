@@ -3,6 +3,8 @@ import pickle
 import pandas as pd
 from sqlalchemy import create_engine
 
+nltk.download(['punkt', 'wordnet', 'stopwords'])
+
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
@@ -18,7 +20,6 @@ from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-nltk.download(['punkt', 'wordnet', 'stopwords'])
 stop_words = stopwords.words("english")
 
 

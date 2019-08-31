@@ -23,6 +23,8 @@ stop_words = stopwords.words("english")
 
 
 def load_data(database_filepath):
+    """Loads cleaned data from SQL, sets corresponding values
+    as input variable and target variables"""
     engine = create_engine('sqlite:///'+ database_filepath)
     df = pd.read_sql_table("DisasterMessages", engine)
     
@@ -33,6 +35,7 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """Tokenizes and lemmatizes provide text"""
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
@@ -41,6 +44,8 @@ def tokenize(text):
 
 
 def build_model():
+    """Generates a ML pipeline which uses Grid Search for tuning
+    Random Forest Classifier."""
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -52,6 +57,8 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """Prints out precision, recall, and Fscore of a model,
+    by categories and total average""" 
     Y_pred = model.predict(X_test)
     for i in range(len(category_names)-1):
         print("Category:", category_names[i],"\n", classification_report(Y_test.iloc[:, i], Y_pred[:, i]))
@@ -67,6 +74,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
     
 def save_model(model, model_filepath):
+    """Saves the model as pickle file into specified path"""
     pickle.dump(model, open(model_filepath, "wb"))
 
 

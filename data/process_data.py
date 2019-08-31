@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    
+    """loads message and catgories data in two files, returns merge of them""" 
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = pd.merge(messages, categories)
@@ -11,6 +11,8 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """Splits the categories data, existing in a single column, to dedicated columns
+    Sets column names accordingly, removes duplicates, fills NaNs with zeros""" 
     df_categories = pd.DataFrame(df["categories"].str.split(";", expand=True))
     row = df_categories.iloc[0]
     category_colnames = row.str.split('-').str[0].tolist()
@@ -28,6 +30,7 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """Saves cleaned data to SQL, with the provided name"""
     engine = create_engine('sqlite:///' + database_filename)
     df.to_sql('DisasterMessages', engine, if_exists='replace', index=False)
 
